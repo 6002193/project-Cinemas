@@ -1,0 +1,111 @@
+/* Algemene instellingen */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: url('../fotos/bios.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(10, 20, 40, 0.9);
+  padding: 20px;
+  font-family: 'Jomhuria', cursive;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 200px;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 40px;
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.intro {
+  width: 40%;
+  font-size: 28px;
+  background-color: rgba(0, 0, 0, 0.296);
+  padding: 20px;
+  border-radius: 10px;
+  font-family: 'Karla', Courier, monospace;
+}
+
+.poster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 40%;
+}
+
+.poster img {
+  width: 300px;
+  height: auto;
+  box-shadow: 0 0 10px black;
+}
+
+.button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #375091;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* ✅ Media query voor mobiele schermen */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  main {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .intro, .poster {
+    width: 100%;
+  }
+
+  /*  Verberg afbeelding op mobiel */
+  .poster img {
+    display: none;
+  }
+}
