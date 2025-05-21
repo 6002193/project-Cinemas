@@ -1,9 +1,11 @@
 /* Algemene instellingen */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
   color: white;
-  background: url('../fotos/bios.png') no-repeat center center fixed;
+}
+
+.background {
+    background: url('../fotos/bios.png') no-repeat center center fixed;
   background-size: cover;
 }
 
