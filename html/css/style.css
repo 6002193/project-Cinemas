@@ -25,6 +25,13 @@ header {
   font-size: 50px;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -45,6 +52,11 @@ main {
   padding: 40px;
   flex-wrap: wrap;
   gap: 30px;
+}
+
+.topbar{
+  width: 50px;
+  height: auto;
 }
 
 .intro {
