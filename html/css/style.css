@@ -11,6 +11,10 @@ body {
   background-size: cover;
 }
 
+h1 {
+  letter-spacing: 1px;
+}
+
 header {
   display: flex;
   justify-content: flex-start;
@@ -27,6 +31,7 @@ header {
   font-size: 50px;
   text-decoration: none;
   color: white;
+  letter-spacing: 2px;
 }
 
 nav {
@@ -134,9 +139,9 @@ main {
 
 .film-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  width: 90%;
+  width: 120%;
   max-width: 1000px;
   margin-top: 30px;
 }
