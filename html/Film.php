@@ -45,7 +45,7 @@
             <h3>locaties:</h3>
             <h3>genre:</h3>
             <h3>datum:</h3>
-      <input type="button" value="Kaartjes kopen"></input>
+      <input type="button" value="Kaartjes kopen" class="button-link"></input>
     </article>
 </article>
     </main>
