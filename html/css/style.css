@@ -2,7 +2,7 @@
 body {
   margin: 0;
   color: white;
-  background-color: rgb(23,30,53);
+  background-color: rgb(39,50,82);
   font-family: 'Karla', sans-serif;
 }
 
@@ -15,7 +15,7 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: rgba(10, 20, 40, 0.9);
+  background-color: rgb(24,31,51);
   padding: 20px;
   font-family: 'Jomhuria', cursive;
   gap: 100px;
@@ -204,6 +204,8 @@ main {
   }
 }
 
+/* de film pagina */
+
 .titel{
   font-size: 70px;
 }
@@ -226,8 +228,4 @@ grid-template-rows: auto auto;
 
 .info > h3{
   padding-left: 20px;
-}
-
-.info > button{
-  .
 }
