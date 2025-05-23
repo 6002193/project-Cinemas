@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Zorgt ervoor dat de pagina correct word weergegeven op mobiele apparaten.-->
+    <meta name="viewport" content="width=device-width, initial-scale=1,0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--SEO (search engen optimation) Metagegevens -->
+    <!-- Descripption voor zoekmachines en sociale media, omschrijft kort de inhoud van de pagina-->
+    <meta name="description" content="Een korte beschrijfing van de pagina.">
+    <!-- Keywords Helpt zoekmachines begrijpen waar de pagina over gaat. -->
+    <meta name="Keywords" content="html, meta tags, voorbeeld, webontwikkeling">
+    <!-- Author de naam van de developer van de pagina. -->
+    <meta name="author" content="Tijs Vreijling">
+
+    <title>MboCinemas</title>
+    <!-- Favicon kleine afbeelding die wordt weergegeven in de browser-tabbladen -->
+    <link rel="icon" href=".ico" type="image/x-icon">
+    <!-- link naar de stylesheet-->
+    <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Mbo Cinema</a>
+            <ul>
+                <li><a href="films.html">Films</a></li>
+                <li><a href="locaties.html">Locaties</a></li>
+                <li><a href="Mijn_Films.html">Mijn Films</a></li>
+            </ul>
+            <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
+        </nav>
+    </header>
+    <main class="film">
+        <h1 class="titel">Film</h1>
+        <img src="fotos/shang-chi.png" alt="de film" class="afbeelding">
+        <article>"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum mollitia at, quae animi assumenda veniam voluptate ut porro reiciendis quaerat magni dignissimos dolor ratione soluta suscipit. Et totam error est?"</article>
+        <article class="info">
+            <h3>titel:</h3>
+            <h3>locaties:</h3>
+            <h3>genre:</h3>
+            <h3>datum:</h3>
+      <input type="button" value="Kaartjes kopen"></input>
+    </article>
+</article>
+    </main>
+    <footer>
+    </footer>
+</body>
