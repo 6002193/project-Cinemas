@@ -9,13 +9,13 @@
 
     <!--SEO (search engen optimation) Metagegevens -->
     <!-- Descripption voor zoekmachines en sociale media, omschrijft kort de inhoud van de pagina-->
-    <meta name="description" content="Een korte beschrijfing van de pagina.">
+    <meta name="description" content="dit is de film die u heeft geselecteerd">
     <!-- Keywords Helpt zoekmachines begrijpen waar de pagina over gaat. -->
-    <meta name="Keywords" content="html, meta tags, voorbeeld, webontwikkeling">
+    <meta name="Keywords" content="Movie, MboCinemas, MovieTheatre">
     <!-- Author de naam van de developer van de pagina. -->
     <meta name="author" content="Tijs Vreijling">
 
-    <title>MboCinemas</title>
+    <title>MboCinemas film</title>
     <!-- Favicon kleine afbeelding die wordt weergegeven in de browser-tabbladen -->
     <link rel="icon" href=".ico" type="image/x-icon">
     <!-- link naar de stylesheet-->
