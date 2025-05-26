@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="javascript/stijl.js"></script>
 </head>
 <body>
 
@@ -21,7 +22,7 @@
         <li><a href="Mijn_Films.html">Mijn Films</a></li>
       </ul>
       <a href="Account_admin.html">
-        <img src="fotos/profielfoto.webp" alt="profielfoto"  class="topbar" >
+        <img src="fotos/profielfoto.webp" alt="profielfoto"  class="topbar">
       </a>
     </nav>
   </header>
@@ -32,9 +33,12 @@
       <h1>Mbo Cinema</h1>
     </section>
 
-    <section class="film-grid">
-      <!-- Herhaal dit blokje voor meer films -->
-      <div class="film-card" >
+    <!-- 🔍 Zoekbalk -->
+    <input type="text" class="search-bar" id="zoekInput" placeholder="Zoek een film...">
+
+    <!-- 🎞️ Filmgrid -->
+    <section class="film-grid" id="filmGrid">
+      <div class="film-card">
         <img src="fotos/shang-chi.png" alt="Film afbeelding">
         <p>shang-chi and the legend of the ten rings</p>
       </div>
@@ -66,9 +70,9 @@
         <img src="fotos/titanic.png" alt="Film afbeelding">
         <p>Titanic</p>
       </div>
-      <!-- Voeg meer toe indien nodig -->
     </section>
   </main>
+
 
 </body>
 </html>
