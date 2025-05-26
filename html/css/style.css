@@ -283,23 +283,41 @@ main {
 
 /* inlog pagina */
 
-main{
-  
+main {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+  padding: 10px;
+}
+.row1{
+order: 1;
+display: flex;
+flex-direction: column;
+}
+.row2{
+  order: 3;
+  display: flex;
+  flex-direction: column;
 }
 
-form{
+.inlogfilm{
+margin-bottom: 30%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  /* margin-left: 40%; */
+  order: 2;
+}
+
+.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 40%;
 }
 
-.container{
-   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.psw{
+.psw {
   text-decoration: none;
 }
