@@ -1,3 +1,38 @@
+<?php
+// --- films.php ---
+// Databaseconnectie + AJAX-response
+$host = 'localhost';
+$db   = 'mbocinema';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
+
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    die("Database connectie mislukt: " . $e->getMessage());
+}
+
+// AJAX-handler
+if (isset($_GET['q'])) {
+    $zoekTerm = $_GET['q'];
+    $stmt = $pdo->prepare("SELECT naam, rating FROM movies WHERE naam LIKE :zoek");
+    $stmt->execute(['zoek' => '%' . $zoekTerm . '%']);
+    $films = $stmt->fetchAll();
+    header('Content-Type: application/json');
+    echo json_encode($films);
+    exit;
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -13,12 +48,17 @@
   <script src="javascript/stijl.js"></script>
 </head>
 <body>
+ 
+<div class="zoek-wrapper">
+  <input type="text" id="zoekInput" placeholder="Zoek een film..." autocomplete="off">
+  <div id="zoekResultaten"></div>
+</div>
 
   <header>
     <nav>
       <a href="index.html" class="logo">Mbo Cinema</a>
       <ul>
-        <li><a href="films.html">Films</a></li>
+        <li><a href="films.php">films</a></li>
         <li><a href="Mijn_Films.html">Mijn Films</a></li>
       </ul>
       <a href="Account_admin.html">
@@ -29,14 +69,10 @@
 
   <main class="films-page">
     <section class="banner">
-      <img src="fotos/bios.png" alt="bioscoop banner">
+      <img src="fotos/banner.png" alt="bioscoop banner">
       <h1>Mbo Cinema</h1>
     </section>
 
-    <!-- 🔍 Zoekbalk -->
-    <input type="text" class="search-bar" id="zoekInput" placeholder="Zoek een film...">
-
-    <!-- 🎞️ Filmgrid -->
     <section class="film-grid" id="filmGrid">
       <div class="film-card">
         <img src="fotos/shang-chi.png" alt="Film afbeelding">
@@ -74,5 +110,11 @@
   </main>
 
 
+</body>
+</html>
+
+
+
+  <script src="javascript/zoekfunctie.js"></script>
 </body>
 </html>

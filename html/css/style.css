@@ -122,8 +122,8 @@ main {
 
 .banner img {
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: 400px;
+  object-fit: fill;
 }
 
 .banner h1 {
@@ -399,6 +399,7 @@ form {
 }
 
 .search-bar {
+  display: flex;
   margin: 30px 0 10px 0;
   padding: 10px;
   width: 300px;
@@ -407,3 +408,65 @@ form {
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
+
+#zoekInput {
+  display: block;
+  padding: 12px 20px;
+  width: 100%;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  color: #000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+}
+
+#zoekInput:focus {
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+#zoekResultaten {
+  position: absolute;
+  top: 100%; /* direct onder input */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 10px 0;
+  font-size: 18px;
+  text-align: left;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Styling voor individuele zoekresultaten */
+#zoekResultaten .film-card {
+  padding: 10px 20px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+#zoekResultaten .film-card:last-child {
+  border-bottom: none;
+}
+
+#zoekResultaten .film-card:hover {
+  background-color: #f4f4f4;
+}
+
+/* Optional: wrapper als je 't extern wil stylen */
+.zoek-wrapper {
+  position: relative;
+  width: 60%;
+  max-width: 500px;
+  margin: 40px auto 20px auto;
+}
+
