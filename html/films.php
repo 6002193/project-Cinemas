@@ -45,7 +45,7 @@ if (isset($_GET['q'])) {
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script src="javascript/stijl.js"></script>
+  <script src="javascript/stijl.js" defer></script>
 </head>
 <body>
  
