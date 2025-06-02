@@ -36,13 +36,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"] = $username;
 
             // Redirect to the protected page 
-            header("Location: ingelogd.php"); 
+            header("Location: index.html"); 
             exit; 
         } else { 
-            echo "Invalid password."; 
-        } 
+        //    echo "<script>alert('login mislukt');</script>";
+             header("Location: inloggen.php, fout");
+             exit;
+        }
     } else { 
-        echo "No user found with that username."; 
+      
+          header("Location: inloggen.php");
+             exit;
     } 
  
     // Close the statement 
@@ -51,4 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
 // Close the database connection 
 $conn->close(); 
+
+header( "index.html" );
+exit;
 ?> 

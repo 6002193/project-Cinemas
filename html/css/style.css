@@ -384,6 +384,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-self: center;
+  margin-top: 50%;
   /* margin-left: 40%; */
   order: 2;
 }
@@ -392,6 +393,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  
 }
 
 .psw {

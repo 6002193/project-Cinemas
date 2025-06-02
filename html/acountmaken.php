@@ -55,9 +55,9 @@
         </row2>
 
         <form action="check_password.php" method="POST">
-            <!-- <div class="imgcontainer">
+            <div class="imgcontainer">
                 <img src="fotos/profielfoto.webp" alt="Avatar" class="avatar">
-            </div> -->
+            </div>
 
             <div class="container">
                 <label for="uname"><b>Username</b></label>
@@ -66,17 +66,23 @@
                 <label for="psw"><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="psw" required>
 
-             
+                <label for="eml"><b>email</b></label>
+                <input type="email" placeholder="Enter email" name="eml" required>
 
-                <button class="button-link" type="submit">Login</button>
+
+                <label for="tel"><b>telefoonnummer</b></label>
+                <input type="tel" placeholder="Enter Telephone number" name="tel" pattern="[0-9]{3}[0-9]{2}[0-9]{3}"required>
+
+
+                <button type="submit">Login</button>
                 <label>
                     <input type="checkbox" name="remember"> Remember me
                 </label>
             </div>
 
-             <div class="container">
-            
-                <span class="psw"> <a href="acountmaken.php" class="psw">Nog geen acount</a></span> 
+            <!-- <div class="container">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="Account_admin.html" class="psw">password?</a></span> -->
             </div>
         </form>
     </main>
