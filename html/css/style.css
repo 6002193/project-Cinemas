@@ -432,10 +432,10 @@ form {
 #zoekResultaten {
   position: absolute;
   top: 100%; /* direct onder input */
-  left: 50%;
+  left: 54%;
   transform: translateX(-50%);
-  width: 100%;
-  background-color: #fff;
+  width: 110%;
+  background-color: #060202;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
@@ -459,7 +459,7 @@ form {
 }
 
 #zoekResultaten .film-card:hover {
-  background-color: #f4f4f4;
+  background-color: #3c0101;
 }
 
 /* Optional: wrapper als je 't extern wil stylen */
