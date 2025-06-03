@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rating = $_POST['rating'] ?? '';
 
     // Verbinden met de database
-    $conn = new mysqli("localhost", "root", "", "movies");
+$conn = new mysqli("localhost", "root", "", "mbocinema");
 
     // Verbinding checken
     if ($conn->connect_error) {
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert uitvoeren met prepared statement
-    $stmt = $conn->prepare("INSERT INTO films (naam, rating) VALUES (?, ?)");
+    $stmt = $conn->prepare("INSERT INTO movies (naam, rating) VALUES (?, ?)");
     $stmt->bind_param("si", $naam, $rating);
 
     if ($stmt->execute()) {
