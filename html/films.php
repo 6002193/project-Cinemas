@@ -1,39 +1,37 @@
 <?php
-// Foutmeldingen aanzetten voor debugging
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// --- films.php ---
+// Databaseconnectie + AJAX-response
+$host = 'localhost';
+$db   = 'mbocinema';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
 
-// Variabelen initiëren
-$melding = "";
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+];
 
-// Als het formulier is verzonden:
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $naam = $_POST['naam'] ?? '';
-    $rating = $_POST['rating'] ?? '';
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    die("Database connectie mislukt: " . $e->getMessage());
+}
 
-    // Verbinden met de database
-    $conn = new mysqli("localhost", "root", "", "movies");
-
-    // Verbinding checken
-    if ($conn->connect_error) {
-        die("Verbinding mislukt: " . $conn->connect_error);
-    }
-
-    // Insert uitvoeren met prepared statement
-    $stmt = $conn->prepare("INSERT INTO films (naam, rating) VALUES (?, ?)");
-    $stmt->bind_param("si", $naam, $rating);
-
-    if ($stmt->execute()) {
-        $melding = "✅ Film succesvol toegevoegd!";
-    } else {
-        $melding = "❌ Fout bij toevoegen: " . $conn->error;
-    }
-
-    $stmt->close();
-    $conn->close();
+// AJAX-handler
+if (isset($_GET['q'])) {
+    $zoekTerm = $_GET['q'];
+    $stmt = $pdo->prepare("SELECT naam, rating FROM movies WHERE naam LIKE :zoek");
+    $stmt->execute(['zoek' => '%' . $zoekTerm . '%']);
+    $films = $stmt->fetchAll();
+    header('Content-Type: application/json');
+    echo json_encode($films);
+    exit;
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -47,35 +45,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="javascript/stijl.js" defer></script>
 </head>
 <body>
+ 
+<div class="zoek-wrapper">
+  <input type="text" id="zoekInput" placeholder="Zoek een film..." autocomplete="off">
+  <div id="zoekResultaten"></div>
+</div>
+
   <header>
     <nav>
       <a href="index.html" class="logo">Mbo Cinema</a>
       <ul>
-        <li><a href="fimlbeheer.php">filmbeheer</a></li>
-        <li><a href="zaaleheer.html">zaalbeheer</a></li>
-        <li><a href="reservering.html">reserveringbeheer</a></li>
-        <li><a href="Account_admin.html">accountbeheer</a></li>
+        <li><a href="films.php">films</a></li>
+        <li><a href="Mijn_Films.html">Mijn Films</a></li>
       </ul>
       <a href="Account_admin.html">
-        <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
+        <img src="fotos/profielfoto.webp" alt="profielfoto"  class="topbar">
       </a>
     </nav>
   </header>
 
-  <main>
-    <h2>Voeg een film toe</h2>
-    <?php if (!empty($melding)) echo "<p>$melding</p>"; ?>
-    <form method="POST" action="fimlbeheer.php">
-      <label for="naam">Filmtitel:</label><br>
-      <input type="text" id="naam" name="naam" required><br><br>
+  <main class="films-page">
+    <section class="banner">
+      <img src="fotos/banner.png" alt="bioscoop banner">
+      <h1>Mbo Cinema</h1>
+    </section>
 
-      <label for="rating">PEGI Rating:</label><br>
-      <input type="number" id="rating" name="rating" min="0" max="18" required><br><br>
-
-      <input type="submit" value="Voeg toe">
-    </form>
+    <section class="film-grid" id="filmGrid">
+      <div class="film-card">
+        <img src="fotos/shang-chi.png" alt="Film afbeelding">
+        <p>shang-chi and the legend of the ten rings</p>
+      </div>
+      <div class="film-card">
+        <img src="fotos/dinopark.png" alt="Film afbeelding">
+        <p>Jurassic park</p>
+      </div>
+      <div class="film-card">
+        <img src="fotos/inception.png" alt="Film afbeelding">
+        <p>Inception</p>
+      </div>
+      <div class="film-card">
+        <img src="fotos/borderlands.png" alt="Film afbeelding">
+        <p>Borderlands</p>
+      </div>
+      <div class="film-card">
+        <img src="fotos/batman.png" alt="Film afbeelding">
+        <p>The dark knight</p>
+      </div>
+      <div class="film-card">
+        <img src="fotos/redemption.png" alt="Film afbeelding">
+        <p>The shawshank redemption</p>
+      </div>
+      <div class="film-card">
+        <img src="fotos/starwars.png" alt="Film afbeelding">
+        <p>Star wars a new hope</p>
+      </div>
+      <div class="film-card">
+        <img src="fotos/titanic.png" alt="Film afbeelding">
+        <p>Titanic</p>
+      </div>
+    </section>
   </main>
+
+
+</body>
+</html>
+
+
+
+  <script src="javascript/zoekfunctie.js"></script>
 </body>
 </html>

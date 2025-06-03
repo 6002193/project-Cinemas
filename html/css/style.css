@@ -472,3 +472,109 @@ form {
   margin: 40px auto 20px auto;
 }
 
+
+
+
+
+/*  TOEGEVOEGDE STYLING VOOR FORMULIER PAGINA */
+.toevoeg-pagina {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  background-color: #f4f4f4;
+  font-family: 'Karla', sans-serif;
+  color: #333;
+}
+
+
+.toevoeg-pagina h2 {
+  text-align: center;
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.toevoeg-pagina form {
+  display: flex;
+  flex-direction: column;
+}
+
+.toevoeg-pagina label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.toevoeg-pagina input[type="text"],
+.toevoeg-pagina input[type="number"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.toevoeg-pagina input[type="submit"] {
+  background-color: #008cba;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toevoeg-pagina input[type="submit"]:hover {
+  background-color: #005f7f;
+}
+
+.toevoeg-pagina .success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.toevoeg-pagina .error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+/* Film lijst container */
+.film-lijst {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #2c3655;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  font-family: 'Karla', sans-serif;
+}
+
+/* Individuele film in de lijst */
+.film-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #475682;
+  color: white;
+  font-size: 18px;
+  transition: background-color 0.2s ease;
+}
+
+.film-item:last-child {
+  border-bottom: none;
+}
+
+.film-item:hover {
+  background-color: #375091;
+  cursor: default;
+}

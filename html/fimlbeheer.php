@@ -1,36 +1,63 @@
 <?php
-// Foutmeldingen aanzetten voor debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Variabelen initiëren
 $melding = "";
 
-// Als het formulier is verzonden:
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $naam = $_POST['naam'] ?? '';
-    $rating = $_POST['rating'] ?? '';
+// Verwijderen
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verwijder_id'])) {
+    $verwijder_id = $_POST['verwijder_id'];
 
-    // Verbinden met de database
-$conn = new mysqli("localhost", "root", "", "mbocinema");
-
-    // Verbinding checken
+    $conn = new mysqli("localhost", "root", "", "mbocinema");
     if ($conn->connect_error) {
         die("Verbinding mislukt: " . $conn->connect_error);
     }
 
-    // Insert uitvoeren met prepared statement
+    $stmt = $conn->prepare("DELETE FROM movies WHERE naam = ?");
+    $stmt->bind_param("s", $verwijder_id);
+
+    if ($stmt->execute()) {
+        $melding = " Film verwijderd!";
+    } else {
+        $melding = " Fout bij verwijderen: " . $conn->error;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+// Toevoegen
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['naam'], $_POST['rating']) && empty($_POST['verwijder_id'])) {
+    $naam = $_POST['naam'];
+    $rating = $_POST['rating'];
+
+    $conn = new mysqli("localhost", "root", "", "mbocinema");
+    if ($conn->connect_error) {
+        die("Verbinding mislukt: " . $conn->connect_error);
+    }
+
     $stmt = $conn->prepare("INSERT INTO movies (naam, rating) VALUES (?, ?)");
     $stmt->bind_param("si", $naam, $rating);
 
     if ($stmt->execute()) {
-        $melding = "✅ Film succesvol toegevoegd!";
+        $melding = " Film succesvol toegevoegd!";
     } else {
-        $melding = "❌ Fout bij toevoegen: " . $conn->error;
+        $melding = " Fout bij toevoegen: " . $conn->error;
     }
 
     $stmt->close();
+    $conn->close();
+}
+
+// Ophalen van alle films
+$conn = new mysqli("localhost", "root", "", "mbocinema");
+$films = [];
+if (!$conn->connect_error) {
+    $result = $conn->query("SELECT * FROM movies");
+    if ($result) {
+        $films = $result->fetch_all(MYSQLI_ASSOC);
+    }
     $conn->close();
 }
 ?>
@@ -67,7 +94,7 @@ $conn = new mysqli("localhost", "root", "", "mbocinema");
   <main>
     <h2>Voeg een film toe</h2>
     <?php if (!empty($melding)) echo "<p>$melding</p>"; ?>
-    <form method="POST" action="fimlbeheer.php">
+    <form method="POST" action="fimlbeheer.php" class="toevoeg-pagina">
       <label for="naam">Filmtitel:</label><br>
       <input type="text" id="naam" name="naam" required><br><br>
 
@@ -76,6 +103,20 @@ $conn = new mysqli("localhost", "root", "", "mbocinema");
 
       <input type="submit" value="Voeg toe">
     </form>
-  </main>
+
+<h2>Bestaande films</h2>
+<div class="film-lijst">
+  <?php foreach ($films as $film): ?>
+    <div class="film-item">
+      <div><?= htmlspecialchars($film['naam']) ?></div>
+      <div><?= htmlspecialchars($film['rating']) ?></div>
+      <form method="POST" action="fimlbeheer.php" onsubmit="return confirm('Weet je zeker dat je deze film wilt verwijderen?');">
+        <input type="hidden" name="verwijder_id" value="<?= $film['naam'] ?>">
+        <button type="submit">Verwijder</button>
+      </form>
+    </div>
+  <?php endforeach; ?>
+</div>
+
 </body>
 </html>
