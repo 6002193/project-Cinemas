@@ -18,32 +18,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Check for empty fields 
     if (empty($username) || empty($password) || empty($email)|| empty($telefoonnumer)) { 
         echo "je hebt nog niet alles ingevuld"; 
-        exit; 
+        exit;
     }
     
-    $Hashed_password = password_hash($password);
-   
+   else {$Hashed_password = password_hash($password, PASSWORD_DEFAULT);
+   }
 
 
-$stmt = $conn->prepare("SELECT Id, UserPassword FROM users WHERE UserName = ?");
+$stmt = $conn->prepare("SELECT Id FROM users WHERE UserName = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $stmt->store_result();
 
 // Check if username exists 
-if ($stmt->num_rows == 1) {
-    $stmt->bind_result($id, $hashed_password);
-    $stmt->fetch();
-    echo "User bestaat al";
-} else {
-    $sql = "INSERT INTO users (UserName, UserPassword, email, telefoonnumer) VALUES ('$username', '$Hashed_password', '$email', '$telefoonnumer')";
-    echo "New user created successfully";
-}
-// if (mysqli_query($conn, $sql)) {
-//   echo "New user created successfully";
-// } else {
-//   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-// }
+// if ($stmt->num_rows == 1) {
+//     $stmt->bind_result($id, $hashed_password);
+//     $stmt->fetch();
+//     echo "User bestaat al";
+if ($stmt->num_rows > 0) {
+    echo "gebruikersnaam bestaat al";
 
-mysqli_close($conn);
+    } else {
+         $Hashed_password = password_hash($password, PASSWORD_DEFAULT);
+         
+
+   // Insert new user
+        $insert = $conn->prepare("INSERT INTO users (UserName, UserPassword, email, telefoonnumer) VALUES (?, ?, ?, ?)");
+        $insert->bind_param("ssss", $username, $Hashed_password, $email, $telefoonnumer);
+
+        if ($insert->execute()) {
+            echo "Nieuwe gebruiker succesvol aangemaakt.";
+        } else {
+            echo "Fout bij het aanmaken van de gebruiker: " . $insert->error;
+        }
+
+        $insert->close();
+    }
+
+    $stmt->close();
+    $conn->close();
+
 ?>

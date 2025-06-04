@@ -37,7 +37,7 @@
                 <li><a href="reservering.html">reserveringbeheer</a></li>
                 <li><a href="Account_admin.html">accountbeheer</a></li>
             </ul>
-            <a href="Account_admin.html">
+            <a href="inloggen.php">
                 <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
             </a>
         </nav>
