@@ -54,7 +54,7 @@
 
         </row2>
 
-        <form action="check_password.php" method="POST">
+        <form action="maak_password.php" method="POST">
             <div class="imgcontainer">
                 <img src="fotos/profielfoto.webp" alt="Avatar" class="avatar">
             </div>
@@ -71,8 +71,8 @@
 
 
                 <label for="tel"><b>telefoonnummer</b></label>
-                <input type="tel" placeholder="Enter Telephone number" name="tel" pattern="[0-9]{3}[0-9]{2}[0-9]{3}"required>
-
+                <input type="tel" placeholder="Enter Telephone number" name="tel" required>
+<!-- pattern="[0-9]{3}[0-9]{2}[0-9]{3} -->
 
                 <button type="submit">Login</button>
                 <label>
