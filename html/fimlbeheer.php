@@ -105,18 +105,18 @@ if (!$conn->connect_error) {
     </form>
 
 <h2>Bestaande films</h2>
-<div class="film-lijst">
+<section class="film-lijst">
   <?php foreach ($films as $film): ?>
-    <div class="film-item">
-      <div><?= htmlspecialchars($film['naam']) ?></div>
-      <div><?= htmlspecialchars($film['rating']) ?></div>
+    <section class="film-item">
+      <p><?= htmlspecialchars($film['naam']) ?></p>
+      <p><?= htmlspecialchars($film['rating']) ?></p>
       <form method="POST" action="fimlbeheer.php" onsubmit="return confirm('Weet je zeker dat je deze film wilt verwijderen?');">
         <input type="hidden" name="verwijder_id" value="<?= $film['naam'] ?>">
         <button type="submit">Verwijder</button>
       </form>
-    </div>
+  </section>
   <?php endforeach; ?>
-</div>
+  </section>
 
 </body>
 </html>
