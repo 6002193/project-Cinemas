@@ -33,7 +33,7 @@
           <a href="index.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="films.php">films</a></li>
-        <li><a href="Mijn_Films.html">Mijn Films</a></li>
+        <li><a href="Mijn_Films.php">Mijn Films</a></li>
       </ul>
       <a href="Inloggen.php">
         <img src="fotos/profielfoto.webp" alt="profielfoto"  class="topbar" >
@@ -70,9 +70,9 @@
 
                 <label for="tel"><b>telefoonnummer</b></label>
                 <input type="tel" placeholder="Enter Telephone number" name="tel" required>
-<!-- pattern="[0-9]{3}[0-9]{2}[0-9]{3} -->
+                <!-- pattern="[0-9]{3}[0-9]{2}[0-9]{3} -->
 
-                <button type="submit">Login</button>
+                <button type="submit">Maak account</button>
                 <label>
                     <input type="checkbox" name="remember"> Remember me
                 </label>

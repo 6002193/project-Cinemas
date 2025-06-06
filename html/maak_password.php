@@ -36,7 +36,12 @@ $stmt->store_result();
 //     $stmt->fetch();
 //     echo "User bestaat al";
 if ($stmt->num_rows > 0) {
-    echo "gebruikersnaam bestaat al";
+
+        // Display the alert box 
+        echo '<script>
+        alert("Deze gebruikersnaam bestaat al.");
+        window.location.href="acountmaken.php";
+        </script>'; 
 
     } else {
          $Hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -50,11 +55,17 @@ if ($stmt->num_rows > 0) {
             echo "Nieuwe gebruiker succesvol aangemaakt.";
    
             // Redirect to the protected page 
-            header(" index.php, $username"); 
+            header("Location: inloggen.php");            
             exit; 
 
         } else {
-            echo "Fout bij het aanmaken van de gebruiker: " . $insert->error;
+
+            // Display the alert box 
+            echo '<script>
+            alert("Fout bij het aanmaken van de gebruiker.");
+            window.location.href="acountmaken.php";
+            </script>';  
+
         }
 
         $insert->close();

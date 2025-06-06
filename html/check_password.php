@@ -36,16 +36,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"] = $username;
 
             // Redirect to the protected page 
-            header("location: index.php, $username"); 
+            // header("location: ingelogd.php"); 
+            header("location: index.php"); 
+            // header("location: index.php, $username"); 
             exit; 
         } else { 
-        //    echo "<script>alert('login mislukt');</script>";
-             header("Location: inloggen.php, fout");
+
+            // Display the alert box 
+            echo '<script>
+            alert("Login mislukt.");
+            window.location.href="inloggen.php";
+            </script>';
+           
              exit;
         }
     } else { 
-      
-          header("Location: inloggen.php");
+
+            // Display the alert box 
+            echo '<script>
+            alert("Login mislukt.");
+            window.location.href="inloggen.php";
+            </script>';      
+          
              exit;
     } 
  

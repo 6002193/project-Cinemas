@@ -33,7 +33,7 @@
           <a href="index.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="films.php">films</a></li>
-        <li><a href="Mijn_Films.html">Mijn Films</a></li>
+        <li><a href="Mijn_Films.php">Mijn Films</a></li>
       </ul>
       <a href="Inloggen.php">
         <img src="fotos/profielfoto.webp" alt="profielfoto"  class="topbar" >
@@ -72,9 +72,8 @@
                 </label>
             </div>
 
-             <div class="container">
-            
-                <span class="psw"> <a href="acountmaken.php" class="psw">Nog geen acount</a></span> 
+             <div class="container">            
+                <span class="psw"> <a href="acountmaken.php" class="psw">Heeft u nog geen account, klik dan hier.</a></span> 
             </div>
         </form>
     </main>

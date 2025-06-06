@@ -59,7 +59,7 @@ $alleFilms = $stmt->fetchAll();
     <a href="index.php" class="logo">Mbo Cinema</a>
     <ul>
       <li><a href="films.php">films</a></li>
-      <li><a href="Mijn_Films.html">Mijn Films</a></li>
+      <li><a href="Mijn_Films.php">Mijn Films</a></li>
     </ul>
     <a href="Account_admin.html">
       <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">

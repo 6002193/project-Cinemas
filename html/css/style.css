@@ -397,6 +397,8 @@ form {
 }
 
 .psw {
+  padding-top: 10px;
+  color: white;
   text-decoration: none;
 }
 
