@@ -89,12 +89,12 @@ if (!$conn->connect_error) {
 <body>
   <header>
     <nav>
-      <a href="index.html" class="logo">Mbo Cinema</a>
+      <a href="index.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="fimlbeheer.php">filmbeheer</a></li>
         <li><a href="zaaleheer.php">zaalbeheer</a></li>
-        <li><a href="reservering.html">reserveringbeheer</a></li>
-        <li><a href="Account_admin.html">accountbeheer</a></li>
+        <li><a href="reservering.php">reserveringbeheer</a></li>
+        <li><a href="Account_admin.php">accountbeheer</a></li>
       </ul>
       <a href="Account_admin.html">
         <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">

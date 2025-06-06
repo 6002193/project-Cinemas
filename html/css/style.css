@@ -610,8 +610,8 @@ form {
     }
 
     table.film-tabel th, table.film-tabel td {
-      padding: 12px 15px;
-      text-align: left;
+      padding: 15px 15px;
+      text-align: center;
       border-bottom: 1px solid #444;
       color: white;
     }
