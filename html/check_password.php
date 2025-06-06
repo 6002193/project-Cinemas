@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"] = $username;
 
             // Redirect to the protected page 
-            header("Location: index.html"); 
+            header("location: index.php, $username"); 
             exit; 
         } else { 
         //    echo "<script>alert('login mislukt');</script>";
@@ -56,6 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection 
 $conn->close(); 
 
-header( "index.html" );
+header( "index.php" );
 exit;
 ?> 

@@ -45,7 +45,8 @@ if (isset($_GET['q'])) {
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script src="javascript/zoekfunctie.js" defer></script>
+  <script src="javascript/stijl.js" defer></script>
+      <link rel="icon" href="fotos/logo.png" type="image/x-icon">
 </head>
 <body>
  
@@ -56,7 +57,7 @@ if (isset($_GET['q'])) {
 
   <header>
     <nav>
-      <a href="index.html" class="logo">Mbo Cinema</a>
+      <a href="index.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="films.php">films</a></li>
         <li><a href="Mijn_Films.html">Mijn Films</a></li>
