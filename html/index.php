@@ -28,7 +28,7 @@
   <main>
     <section class="intro">
       <p>
-        Welkom bij Mbo Cinema – Jouw filmervaring begint hier<br>
+        Welkom bij Mbo Cinema <?php $username ?> Jouw filmervaring begint hier<br>
         Stap binnen in de wereld van film! Bij Mbo Cinema beleef je de nieuwste,
         meeslepende arthousefilms en tijdloze klassiekers in een comfortabele
         en moderne setting. Geniet van de ultieme bioscoopervaring met haarscherp

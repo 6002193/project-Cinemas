@@ -48,6 +48,11 @@ if ($stmt->num_rows > 0) {
 
         if ($insert->execute()) {
             echo "Nieuwe gebruiker succesvol aangemaakt.";
+   
+            // Redirect to the protected page 
+            header(" index.php, $username"); 
+            exit; 
+
         } else {
             echo "Fout bij het aanmaken van de gebruiker: " . $insert->error;
         }
