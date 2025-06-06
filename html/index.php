@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Een korte omschrijving van je website die in zoekmachines verschijnt.">
@@ -7,20 +8,22 @@
   <meta name="keywords" content="Movie, MboCinemas, MovieTheatre">
   <meta name="author" content="Jelle Groen">
   <title>Mbo Cinema</title>
+  <link rel="icon" href="fotos/logo.php" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body class="background">
   <header>
     <nav>
-          <a href="index.html" class="logo">Mbo Cinema</a>
+      <a href="index.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="films.php">films</a></li>
         <li><a href="Mijn_Films.html">Mijn Films</a></li>
       </ul>
       <a href="Inloggen.php">
-        <img src="fotos/profielfoto.webp" alt="profielfoto"  class="topbar" >
+        <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
       </a>
     </nav>
   </header>
@@ -43,4 +46,5 @@
     </section>
   </main>
 </body>
+
 </html>

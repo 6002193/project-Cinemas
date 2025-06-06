@@ -17,7 +17,7 @@
 
     <title>MBO Cinema Inlogen</title>
     <!-- Favicon kleine afbeelding die wordt weergegeven in de browser-tabbladen -->
-    <link rel="icon" href=".ico" type="image/x-icon">
+    <link rel="icon" href="fotos/logo.png" type="image/x-icon">
     <!-- link naar de stylesheet-->
     <link rel="stylesheet" href="css/style.css">
     <!-- link naar de google fonts-->
@@ -28,20 +28,18 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <a href="index.html" class="logo">Mbo Cinema</a>
-            <ul>
-                <li><a href="fimlbeheer.html">filmbeheer</a></li>
-                <li><a href="zaaleheer.html">zaalbeheer</a></li>
-                <li><a href="reservering.html">reserveringbeheer</a></li>
-                <li><a href="Account_admin.html">accountbeheer</a></li>
-            </ul>
-            <a href="inloggen.php">
-                <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
-            </a>
-        </nav>
-    </header>
+  <header>
+    <nav>
+          <a href="index.php" class="logo">Mbo Cinema</a>
+      <ul>
+        <li><a href="films.php">films</a></li>
+        <li><a href="Mijn_Films.html">Mijn Films</a></li>
+      </ul>
+      <a href="Inloggen.php">
+        <img src="fotos/profielfoto.webp" alt="profielfoto"  class="topbar" >
+      </a>
+    </nav>
+  </header>
     <main>
         <row1 class="row1">
             <img class="inlogfilm" src="fotos/shang-chi.png" alt="Film afbeelding">

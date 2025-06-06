@@ -56,6 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection 
 $conn->close(); 
 
-header( "index.html" );
+header( "index.php" );
 exit;
 ?> 
