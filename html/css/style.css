@@ -482,7 +482,7 @@ form {
   justify-content: center;
   align-items: center;
   padding: 40px;
-  background-color: #f4f4f4;
+  background-color: #435ba1;
   font-family: 'Karla', sans-serif;
   color: #333;
 }
@@ -578,3 +578,73 @@ form {
   background-color: #375091;
   cursor: default;
 }
+
+.film-container {
+        margin: 40px auto;
+        max-width: 800px;
+        padding: 20px;
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        color: #fff;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .film {
+        margin-bottom: 30px;
+        border-bottom: 1px solid #444;
+        padding-bottom: 20px;
+    }
+    .film h2 {
+        font-family: 'Karla', sans-serif;
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+    .film p {
+        margin: 5px 0;
+    }
+
+
+        table.film-tabel {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    table.film-tabel th, table.film-tabel td {
+      padding: 12px 15px;
+      text-align: left;
+      border-bottom: 1px solid #444;
+      color: white;
+    }
+
+    table.film-tabel td.seats {
+      text-align: right;
+      font-weight: bold;
+    }
+
+    table.film-tabel tr:hover {
+      background-color: #2c3e50;
+    }
+
+    .zaal-form {
+      margin-top: 10px;
+    }
+
+    .zaal-form input[type="number"] {
+      padding: 6px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .zaal-form button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      background-color: #2979ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .zaal-form button:hover {
+      background-color: #005f7f;
+    }
+    

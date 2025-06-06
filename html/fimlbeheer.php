@@ -28,17 +28,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verwijder_id'])) {
 }
 
 // Toevoegen
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['naam'], $_POST['rating']) && empty($_POST['verwijder_id'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['naam'], $_POST['rating'], $_POST['room'], $_POST['seats']) && empty($_POST['verwijder_id'])) {
     $naam = $_POST['naam'];
     $rating = $_POST['rating'];
+    $room = $_POST['room'];
+    $seats = $_POST['seats'];
 
     $conn = new mysqli("localhost", "root", "", "mbocinema");
     if ($conn->connect_error) {
         die("Verbinding mislukt: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("INSERT INTO movies (naam, rating) VALUES (?, ?)");
-    $stmt->bind_param("si", $naam, $rating);
+    // Check of room is ingevuld
+if (empty($_POST['room'])) {
+    $room = null;
+    $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats) VALUES (?, ?, NULL, ?)");
+    $stmt->bind_param("sii", $naam, $rating, $seats);
+} else {
+    $room = $_POST['room'];
+    $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("siii", $naam, $rating, $room, $seats);
+}
+
 
     if ($stmt->execute()) {
         $melding = " Film succesvol toegevoegd!";
@@ -81,7 +92,7 @@ if (!$conn->connect_error) {
       <a href="index.html" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="fimlbeheer.php">filmbeheer</a></li>
-        <li><a href="zaaleheer.html">zaalbeheer</a></li>
+        <li><a href="zaaleheer.php">zaalbeheer</a></li>
         <li><a href="reservering.html">reserveringbeheer</a></li>
         <li><a href="Account_admin.html">accountbeheer</a></li>
       </ul>
@@ -92,7 +103,7 @@ if (!$conn->connect_error) {
   </header>
 
   <main>
-    <h2>Voeg een film toe</h2>
+    <h2>bestaande films</h2>
     <?php if (!empty($melding)) echo "<p>$melding</p>"; ?>
     <form method="POST" action="fimlbeheer.php" class="toevoeg-pagina">
       <label for="naam">Filmtitel:</label><br>
@@ -101,10 +112,17 @@ if (!$conn->connect_error) {
       <label for="rating">PEGI Rating:</label><br>
       <input type="number" id="rating" name="rating" min="0" max="18" required><br><br>
 
+      <label for="room">kamernummer:</label><br>
+      <input type="number" id="room" name="room"><br><br>
+
+      <label for="seats">stoelen:</label><br>
+      <input type="number" id="seats" name="seats" required><br><br>
+
+
       <input type="submit" value="Voeg toe">
     </form>
 
-<h2>Bestaande films</h2>
+<h2>voeg een film toe</h2>
 <section class="film-lijst">
   <?php foreach ($films as $film): ?>
     <section class="film-item">
