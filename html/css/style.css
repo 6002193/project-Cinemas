@@ -730,3 +730,57 @@ form {
   width: 24px;
   height: 24px;
 }
+
+/* --- Reserveringbeheer Styling --- */
+.reservering-overzicht {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Karla', sans-serif;
+}
+
+.reservering-overzicht h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.reservering-tabel {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.reservering-tabel thead {
+  background-color: #333;
+  color: white;
+}
+
+.reservering-tabel th,
+.reservering-tabel td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.reservering-tabel tbody tr:nth-child(even) {
+  background-color: #161e32;
+}
+
+.reservering-tabel tbody tr:hover {
+  background-color: #243257;
+}
+
+.reservering-tabel button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reservering-tabel button:hover {
+  background-color: #c0392b;
+}

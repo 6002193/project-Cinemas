@@ -46,7 +46,6 @@ if ($availableSeats !== false && $availableSeats >= $aantal) {
     echo "<script>alert('Niet genoeg stoelen beschikbaar voor deze film.'); window.history.back();</script>";
     exit;
 }
-
 }
 ?>
 
