@@ -1,77 +1,49 @@
 <?php
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 $melding = "";
+
+// Connectie
+$conn = new mysqli("localhost", "root", "", "mbocinema");
+if ($conn->connect_error) die("Verbinding mislukt: " . $conn->connect_error);
 
 // Verwijderen
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verwijder_id'])) {
-    $verwijder_id = $_POST['verwijder_id'];
-
-    $conn = new mysqli("localhost", "root", "", "mbocinema");
-    if ($conn->connect_error) {
-        die("Verbinding mislukt: " . $conn->connect_error);
-    }
-
     $stmt = $conn->prepare("DELETE FROM movies WHERE naam = ?");
-    $stmt->bind_param("s", $verwijder_id);
-
-    if ($stmt->execute()) {
-        $melding = " Film verwijderd!";
-    } else {
-        $melding = " Fout bij verwijderen: " . $conn->error;
-    }
-
+    $stmt->bind_param("s", $_POST['verwijder_id']);
+    $melding = $stmt->execute() ? "Film verwijderd!" : "Fout bij verwijderen: " . $conn->error;
     $stmt->close();
-    $conn->close();
 }
 
 // Toevoegen
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['naam'], $_POST['rating'], $_POST['room'], $_POST['seats']) && empty($_POST['verwijder_id'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['naam'], $_POST['rating'], $_POST['seats']) && empty($_POST['verwijder_id'])) {
     $naam = $_POST['naam'];
     $rating = $_POST['rating'];
-    $room = $_POST['room'];
     $seats = $_POST['seats'];
+    $foto_url = $_POST['foto_url'] ?? null;
 
-    $conn = new mysqli("localhost", "root", "", "mbocinema");
-    if ($conn->connect_error) {
-        die("Verbinding mislukt: " . $conn->connect_error);
-    }
-
-    // Check of room is ingevuld
-if (empty($_POST['room'])) {
-    $room = null;
-    $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats) VALUES (?, ?, NULL, ?)");
-    $stmt->bind_param("sii", $naam, $rating, $seats);
-} else {
-    $room = $_POST['room'];
-    $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("siii", $naam, $rating, $room, $seats);
-}
-
-
-    if ($stmt->execute()) {
-        $melding = " Film succesvol toegevoegd!";
+    if (empty($_POST['room'])) {
+        $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats, foto_url) VALUES (?, ?, NULL, ?, ?)");
+        $stmt->bind_param("siis", $naam, $rating, $seats, $foto_url);
     } else {
-        $melding = " Fout bij toevoegen: " . $conn->error;
+        $room = $_POST['room'];
+        $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats, foto_url) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("siiis", $naam, $rating, $room, $seats, $foto_url);
     }
 
+    $melding = $stmt->execute() ? "Film succesvol toegevoegd!" : "Fout bij toevoegen: " . $conn->error;
     $stmt->close();
-    $conn->close();
 }
 
 // Ophalen van alle films
-$conn = new mysqli("localhost", "root", "", "mbocinema");
 $films = [];
-if (!$conn->connect_error) {
-    $result = $conn->query("SELECT * FROM movies");
-    if ($result) {
-        $films = $result->fetch_all(MYSQLI_ASSOC);
-    }
-    $conn->close();
+$result = $conn->query("SELECT * FROM movies");
+if ($result) {
+    $films = $result->fetch_all(MYSQLI_ASSOC);
 }
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="nl">
@@ -118,6 +90,9 @@ if (!$conn->connect_error) {
       <label for="seats">stoelen:</label><br>
       <input type="number" id="seats" name="seats" required><br><br>
 
+      <label for="foto_url">Afbeeldingslink:</label><br>
+      <input type="url" id="foto_url" name="foto_url"><br><br>
+
 
       <input type="submit" value="Voeg toe">
     </form>
@@ -132,6 +107,9 @@ if (!$conn->connect_error) {
         <input type="hidden" name="verwijder_id" value="<?= $film['naam'] ?>">
         <button type="submit">Verwijder</button>
       </form>
+        <?php if (!empty($film['foto_url'])): ?>
+  <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto" style="width: 100px; height: auto;">
+<?php endif; ?>
   </section>
   <?php endforeach; ?>
   </section>

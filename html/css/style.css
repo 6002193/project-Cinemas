@@ -138,36 +138,50 @@ main {
 }
 
 .film-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  width: 120%;
-  max-width: 1000px;
-  margin-top: 30px;
+  padding: 30px;
+  justify-content: center;
 }
 
 .film-card {
-  background-color: #1e2745;
+  text-decoration: none;
+  /* bestaande code */
+  display: flex;
+  justify-content: space-between;
+  background-color: #2c3655;
+  color: white;
   border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: transform 0.2s ease;
+  padding: 15px;
+  width: 450px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+  align-items: center;
+  gap: 15px;
 }
 
-.film-card:hover {
-  transform: scale(1.03);
+.film-card * {
+  text-decoration: none;
 }
+
+
 
 .film-card img {
-  width: 100%;
-  border-radius: 5px;
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .film-card p {
-  margin-top: 10px;
-  font-size: 20px;
+  margin: 5px 0;
 }
+
+.film-card .film-info {
+  display: flex;
+  flex-direction: column;
+}
+
 
 
 
@@ -479,27 +493,29 @@ form {
 
 
 /*  TOEGEVOEGDE STYLING VOOR FORMULIER PAGINA */
+/* Alleen voor filmbeheer-formulier */
 .toevoeg-pagina {
   display: flex;
   justify-content: center;
-  align-items: center;
+  background-color: #1e2745;
   padding: 40px;
-  background-color: #435ba1;
-  font-family: 'Karla', sans-serif;
-  color: #333;
+  border-radius: 10px;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-
 .toevoeg-pagina h2 {
+  color: white;
+  font-size: 26px;
   text-align: center;
-  color: #333;
-  font-size: 28px;
   margin-bottom: 20px;
 }
 
 .toevoeg-pagina form {
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 .toevoeg-pagina label {
@@ -508,12 +524,12 @@ form {
 }
 
 .toevoeg-pagina input[type="text"],
-.toevoeg-pagina input[type="number"] {
+.toevoeg-pagina input[type="number"],
+.toevoeg-pagina input[type="url"] {
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 16px;
+  border: none;
 }
 
 .toevoeg-pagina input[type="submit"] {
@@ -524,53 +540,35 @@ form {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .toevoeg-pagina input[type="submit"]:hover {
   background-color: #005f7f;
 }
 
-.toevoeg-pagina .success {
-  background-color: #d4edda;
-  color: #155724;
-  padding: 10px;
-  border: 1px solid #c3e6cb;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
-
-.toevoeg-pagina .error {
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 10px;
-  border: 1px solid #f5c6cb;
-  border-radius: 5px;
-  margin-bottom: 15px;
-}
-
-/* Film lijst container */
 .film-lijst {
-  max-width: 600px;
-  margin: 30px auto;
-  background-color: #2c3655;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
-  font-family: 'Karla', sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px;
+  justify-content: center;
 }
 
-/* Individuele film in de lijst */
 .film-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 15px;
-  border-bottom: 1px solid #475682;
-  color: white;
-  font-size: 18px;
-  transition: background-color 0.2s ease;
+  background-color: #2c3655;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 200px;
+  box-shadow: 0 0 10px #000;
 }
+
+.film-item img {
+  width: 100px;
+  height: auto;
+  margin-top: 10px;
+}
+
 
 .film-item:last-child {
   border-bottom: none;
@@ -616,7 +614,7 @@ form {
       text-align: center;
       border-bottom: 1px solid #444;
       color: white;
-    }
+    } 
 
     table.film-tabel td.seats {
       text-align: right;
@@ -649,4 +647,86 @@ form {
     .zaal-form button:hover {
       background-color: #005f7f;
     }
-    
+    body.reserveren-page {
+  margin: 0;
+  font-family: 'Karla', sans-serif;
+  background-color: #1a2238;
+  color: white;
+}
+.reserveren-page .container {
+  display: flex;
+  height: 100vh;
+}
+.reserveren-page .sidebar {
+  width: 150px;
+  background-color: #10172a;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 60px;
+  gap: 20px;
+}
+.reserveren-page .sidebar div {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}
+.reserveren-page .form-wrapper {
+  flex: 1;
+  padding: 60px;
+  background-color: #2c3655;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.reserveren-page h1 {
+  align-self: flex-start;
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+.reserveren-page form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 20px;
+}
+.reserveren-page input[type="text"],
+.reserveren-page input[type="email"],
+.reserveren-page input[type="tel"],
+.reserveren-page input[type="date"],
+.reserveren-page input[type="number"],
+.reserveren-page input[type="time"] {
+  padding: 15px;
+  border: none;
+  background-color: #1a2238;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+}
+.reserveren-page button {
+  padding: 15px;
+  border: none;
+  background-color: #10172a;
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.reserveren-page .home-icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reserveren-page .home-icon img {
+  width: 24px;
+  height: 24px;
+}

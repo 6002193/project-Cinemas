@@ -31,7 +31,8 @@ if (isset($_GET['q'])) {
 }
 
 // Films ophalen voor statische weergave
-$stmt = $pdo->query("SELECT naam, rating, room, seats FROM movies LIMIT 20");
+$stmt = $pdo->query("SELECT naam, rating, room, seats, foto_url FROM movies");
+
 $alleFilms = $stmt->fetchAll();
 ?>
 
@@ -75,12 +76,17 @@ $alleFilms = $stmt->fetchAll();
 
   <section class="film-grid" id="filmGrid">
     <?php foreach ($alleFilms as $film): ?>
-      <article class="film-card">
-        <p><?= htmlspecialchars($film['naam']) ?></p>
-        <p><?= htmlspecialchars($film['rating']) ?></p>
-        <p><?= htmlspecialchars($film['room']) ?></p>
-        <p><?= htmlspecialchars($film['seats']) ?></p>
-    </article>
+<a href="reserveren.php?film=<?= urlencode($film['naam']) ?>" class="film-card">
+  <article class="film-info">
+    <p><?= htmlspecialchars($film['naam']) ?></p>
+    <p>PG <?= htmlspecialchars($film['rating']) ?></p>
+    <p>Roomnumber: <?= htmlspecialchars($film['room']) ?></p>
+    <p>Seats left over: <?= htmlspecialchars($film['seats']) ?></p>
+  </article>
+  <?php if (!empty($film['foto_url'])): ?>
+    <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto">
+  <?php endif; ?>
+</a>
     <?php endforeach; ?>
   </section>
 </main>
