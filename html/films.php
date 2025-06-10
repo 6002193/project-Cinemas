@@ -22,7 +22,8 @@ try {
 // AJAX-handler
 if (isset($_GET['q'])) {
     $zoekTerm = $_GET['q'];
-    $stmt = $pdo->prepare("SELECT naam, rating FROM movies WHERE naam LIKE :zoek");
+    // In films.php – binnen de AJAX-handler
+    $stmt = $pdo->prepare("SELECT naam, rating, room, seats, foto_url FROM movies WHERE naam LIKE :zoek");
     $stmt->execute(['zoek' => '%' . $zoekTerm . '%']);
     $films = $stmt->fetchAll();
     header('Content-Type: application/json');
@@ -57,7 +58,7 @@ $alleFilms = $stmt->fetchAll();
 
 <header>
   <nav>
-    <a href="index.php" class="logo">Mbo Cinema</a>
+          <a href="account_admin.php" class="logo">Mbo Cinema</a>
     <ul>
       <li><a href="films.php">films</a></li>
       <li><a href="Mijn_Films.php">Mijn Films</a></li>

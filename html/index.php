@@ -21,7 +21,7 @@ session_start();
 <body class="background">
   <header>
     <nav>
-      <a href="index.php" class="logo">Mbo Cinema</a>
+      <a href="account_admin.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="films.php">films</a></li>
         <li><a href="Mijn_Films.php">Mijn Films</a></li>

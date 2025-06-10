@@ -2,8 +2,8 @@
 
 <?php
     $servername = "localhost";
-    $username = "CinemasDB";
-    $password = "DB";
+    $username = "root";
+    $password = "";
     $dbname = "mbocinema";
 
     // Create connection

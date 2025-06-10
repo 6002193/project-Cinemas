@@ -16,19 +16,37 @@ zoekInput.addEventListener('keyup', async function () {
     const data = await response.json();
 
     zoekResultaten.innerHTML = '';
+
     if (data.length === 0) {
       zoekResultaten.innerHTML = '<p>Geen resultaten gevonden.</p>';
       return;
     }
 
     data.forEach(film => {
-      const div = document.createElement('div');
-      div.classList.add('film-card');
-      div.innerHTML = `<p>${film.naam}</p><small>Rating: ${film.rating}</small>`;
-      zoekResultaten.appendChild(div);
+      const link = document.createElement('a');
+      link.href = `reserveren.php?film=${encodeURIComponent(film.naam)}`;
+      link.classList.add('film-card');
+
+      link.innerHTML = `
+        <article class="film-info">
+          <p>${film.naam}</p>
+          <p>PG ${film.rating}</p>
+          <p>Roomnumber: ${film.room}</p>
+          <p>Seats left over: ${film.seats}</p>
+        </article>
+        ${film.foto_url ? `<img src="${film.foto_url}" alt="Filmfoto">` : ''}
+      `;
+
+      zoekResultaten.appendChild(link);
     });
 
   } catch (err) {
     zoekResultaten.innerHTML = '<p>Fout bij ophalen van data.</p>';
   }
+});
+
+// Optioneel: Verberg resultaten als je op een resultaat klikt
+zoekResultaten.addEventListener('click', () => {
+  zoekResultaten.innerHTML = '';
+  zoekInput.value = '';
 });

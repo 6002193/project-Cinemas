@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_room'])) {
 <body>
   <header>
     <nav>
-      <a href="index.php" class="logo">Mbo Cinema</a>
+           <a href="index.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="fimlbeheer.php">filmbeheer</a></li>
         <li><a href="">zaalbeheer</a></li>
