@@ -22,7 +22,6 @@ try {
 // AJAX-handler
 if (isset($_GET['q'])) {
     $zoekTerm = $_GET['q'];
-    // In films.php – binnen de AJAX-handler
     $stmt = $pdo->prepare("SELECT naam, rating, room, seats, foto_url FROM movies WHERE naam LIKE :zoek");
     $stmt->execute(['zoek' => '%' . $zoekTerm . '%']);
     $films = $stmt->fetchAll();
@@ -33,7 +32,6 @@ if (isset($_GET['q'])) {
 
 // Films ophalen voor statische weergave
 $stmt = $pdo->query("SELECT naam, rating, room, seats, foto_url FROM movies");
-
 $alleFilms = $stmt->fetchAll();
 ?>
 
@@ -51,19 +49,20 @@ $alleFilms = $stmt->fetchAll();
 </head>
 <body>
 
-<div class="zoek-wrapper">
+<section class="zoek-wrapper">
   <input type="text" id="zoekInput" placeholder="Zoek een film..." autocomplete="off">
-  <div id="zoekResultaten"></div>
-</div>
+  <section id="zoekResultaten"></section>
+</section>
 
 <header>
   <nav>
-          <a href="account_admin.php" class="logo">Mbo Cinema</a>
-    <ul>
-      <li><a href="films.php">films</a></li>
-      <li><a href="Mijn_Films.php">Mijn Films</a></li>
-    </ul>
-    <a href="Account_admin.html">
+    <a href="index.php" class="logo">Mbo Cinema</a>
+        <ul>
+            <li><a href="films.php">Films</a></li>
+            <li><a href="Mijn_Films.php">Mijn Films</a></li>
+            <li><a href="account_admin.php">Account</a></li>
+        </ul>
+    <a href="Account_admin.php">
       <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
     </a>
   </nav>
@@ -77,17 +76,30 @@ $alleFilms = $stmt->fetchAll();
 
   <section class="film-grid" id="filmGrid">
     <?php foreach ($alleFilms as $film): ?>
-<a href="reserveren.php?film=<?= urlencode($film['naam']) ?>" class="film-card">
-  <article class="film-info">
-    <p><?= htmlspecialchars($film['naam']) ?></p>
-    <p>PG <?= htmlspecialchars($film['rating']) ?></p>
-    <p>Roomnumber: <?= htmlspecialchars($film['room']) ?></p>
-    <p>Seats left over: <?= htmlspecialchars($film['seats']) ?></p>
-  </article>
-  <?php if (!empty($film['foto_url'])): ?>
-    <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto">
-  <?php endif; ?>
-</a>
+      <?php if (is_null($film['room'])): ?>
+        <section class="film-card">
+          <article class="film-info">
+            <p><?= htmlspecialchars($film['naam']) ?></p>
+            <p>PG <?= htmlspecialchars($film['rating']) ?></p>
+            <p style="color: red; font-weight: bold;">Deze film draait momenteel niet.</p>
+          </article>
+          <?php if (!empty($film['foto_url'])): ?>
+            <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto">
+          <?php endif; ?>
+        </section>
+      <?php else: ?>
+        <a href="reserveren.php?film=<?= urlencode($film['naam']) ?>" class="film-card">
+          <article class="film-info">
+            <p><?= htmlspecialchars($film['naam']) ?></p>
+            <p>PG <?= htmlspecialchars($film['rating']) ?></p>
+            <p>Roomnumber: <?= htmlspecialchars($film['room']) ?></p>
+            <p>Seats left over: <?= htmlspecialchars($film['seats']) ?></p>
+          </article>
+          <?php if (!empty($film['foto_url'])): ?>
+            <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto">
+          <?php endif; ?>
+        </a>
+      <?php endif; ?>
     <?php endforeach; ?>
   </section>
 </main>

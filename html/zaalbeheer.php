@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['change_room'])) {
         <li><a href="fimlbeheer.php">filmbeheer</a></li>
         <li><a href="">zaalbeheer</a></li>
         <li><a href="reservering.php">reserveringbeheer</a></li>
-        <li><a href="Account_admin.php">accountbeheer</a></li>
+        <li><a href="accounts.php">accountbeheer</a></li>
       </ul>
       <a href="Inloggen.php">
         <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">

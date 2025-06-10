@@ -6,7 +6,7 @@ session_start();
 include 'db_connection.php';  
  
 if ($_SERVER["REQUEST_METHOD"] == "POST") { 
-    // Validate input form form
+    // Validate input from form
     $username = trim($_POST['uname']); 
     $password = trim($_POST['psw']); 
  
@@ -17,48 +17,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } 
  
     // Prepare a SQL statement to prevent SQL injection 
-    $stmt = $conn->prepare("SELECT Id, UserPassword FROM users WHERE UserName = ?");
+    // Let ook admin ophalen in je query
+    $stmt = $conn->prepare("SELECT Id, UserPassword, is_admin FROM users WHERE UserName = ?");
     $stmt->bind_param("s", $username); 
     $stmt->execute(); 
     $stmt->store_result(); 
  
     // Check if username exists 
     if ($stmt->num_rows == 1) { 
-        $stmt->bind_result($id, $hashed_password); 
+        $stmt->bind_result($id, $hashed_password, $admin); 
         $stmt->fetch(); 
-
+ 
         // Verify the password 
         if (password_verify($password, $hashed_password)) { 
             // Password is correct            
             echo "Login successful!"; 
-
-            // Store naam in session
+ 
+            // Store gegevens in session
             $_SESSION["username"] = $username;
-
+            $_SESSION["user_id"] = $id;
+            $_SESSION['admin'] = $admin;  // <-- hier gebruiken we admin van DB
+ 
             // Redirect to the protected page 
-            // header("location: ingelogd.php"); 
             header("location: index.php"); 
-            // header("location: index.php, $username"); 
             exit; 
         } else { 
-
-            // Display the alert box 
             echo '<script>
             alert("Login mislukt.");
             window.location.href="inloggen.php";
             </script>';
-           
-             exit;
+            exit;
         }
     } else { 
-
-            // Display the alert box 
-            echo '<script>
-            alert("Login mislukt.");
-            window.location.href="inloggen.php";
-            </script>';      
-          
-             exit;
+        echo '<script>
+        alert("Login mislukt.");
+        window.location.href="inloggen.php";
+        </script>';      
+        exit;
     } 
  
     // Close the statement 
@@ -67,7 +62,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
 // Close the database connection 
 $conn->close(); 
-
-header( "index.php" );
-exit;
-?> 
+?>

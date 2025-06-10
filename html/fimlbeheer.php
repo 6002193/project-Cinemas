@@ -66,9 +66,9 @@ $conn->close();
         <li><a href="">filmbeheer</a></li>
         <li><a href="zaalbeheer.php">zaalbeheer</a></li>
         <li><a href="reservering.php">reserveringbeheer</a></li>
-        <li><a href="Account_admin.php">accountbeheer</a></li>
+        <li><a href="accounts.php">accountbeheer</a></li>
       </ul>
-      <a href="Account_admin.html">
+      <a href="Account_admin.php">
         <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
       </a>
     </nav>

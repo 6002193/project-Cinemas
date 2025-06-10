@@ -4,7 +4,6 @@ session_start();
 
 <!DOCTYPE html>
 <html lang="nl">
-
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Een korte omschrijving van je website die in zoekmachines verschijnt.">
@@ -12,7 +11,7 @@ session_start();
   <meta name="keywords" content="Movie, MboCinemas, MovieTheatre">
   <meta name="author" content="Jelle Groen">
   <title>Mbo Cinema</title>
-  <link rel="icon" href="fotos/logo.php" type="image/x-icon">
+  <link rel="icon" href="fotos/logo.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -21,10 +20,18 @@ session_start();
 <body class="background">
   <header>
     <nav>
-      <a href="account_admin.php" class="logo">Mbo Cinema</a>
+<a 
+  href="<?= (!empty($_SESSION['admin']) && $_SESSION['admin'] == 1) ? 'fimlbeheer.php' : '#' ?>" 
+  class="logo"
+  <?= (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) ? 'style="pointer-events: none; opacity: 0.5;"' : '' ?>
+>
+  Mbo Cinema
+</a>
+
       <ul>
-        <li><a href="films.php">films</a></li>
+        <li><a href="films.php">Films</a></li>
         <li><a href="Mijn_Films.php">Mijn Films</a></li>
+        <li><a href="account_admin.php">Account</a></li>
       </ul>
       <a href="Inloggen.php">
         <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
@@ -35,13 +42,9 @@ session_start();
   <main>
     <section class="intro">
       <p>
-      
-      <?php
-        if (!empty($_SESSION["username"])) {
-          echo  "<h2>Hallo " . $_SESSION["username"] . ".<br></h2>";
-        }
-      ?>
-
+        <?php if (!empty($_SESSION["username"])): ?>
+          <h2>Hallo <?= htmlspecialchars($_SESSION["username"]) ?>.<br></h2>
+        <?php endif; ?>
 
         Welkom bij Mbo Cinema. Jouw filmervaring begint hier.<br>
         Stap binnen in de wereld van film! Bij Mbo Cinema beleef je de nieuwste,
@@ -58,5 +61,4 @@ session_start();
     </section>
   </main>
 </body>
-
 </html>

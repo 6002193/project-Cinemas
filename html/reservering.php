@@ -60,6 +60,9 @@ $reserveringen = $stmt->fetchAll();
  <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
   <link rel="stylesheet" href="css/style.css">
+  <script src="javascript/afhaak.js" defer></script>
+
+
 </head>
 <body>
   <header>
@@ -69,7 +72,7 @@ $reserveringen = $stmt->fetchAll();
         <li><a href="fimlbeheer.php">filmbeheer</a></li>
         <li><a href="zaalbeheer.php">zaalbeheer</a></li>
         <li><a href="">reserveringbeheer</a></li>
-        <li><a href="Account_admin.php">accountbeheer</a></li>
+        <li><a href="accounts.php">accountbeheer</a></li>
       </ul>
       <a href="Inloggen.php">
         <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">
@@ -120,4 +123,5 @@ $reserveringen = $stmt->fetchAll();
     <?php endif; ?>
   </main>
 </body>
+
 </html>

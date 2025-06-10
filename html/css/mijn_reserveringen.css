@@ -1,0 +1,63 @@
+.mijn-films-container table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+.mijn-films-container th,
+.mijn-films-container td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+.mijn-films-container th {
+    background-color: #243257;
+}
+.mijn-films-container .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.mijn-films-container .delete-btn:hover {
+    background-color: #c0392b;
+}
+
+
+
+        .accounts-page table {
+            border-collapse: collapse;
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+            font-family: Arial, sans-serif;
+        }
+        .accounts-page th, .accounts-page td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .accounts-page th {
+            background-color: #007bff;
+            color: white;
+        }
+        .accounts-page form {
+            margin: 0;
+        }
+        .accounts-page button.delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .accounts-page button.delete-btn:hover {
+            background-color: #a71d2a;
+        }
+        /* Optioneel: wat padding boven de tabel */
+        .accounts-page main {
+            padding: 20px 0;
+        }
