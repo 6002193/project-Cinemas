@@ -13,9 +13,17 @@ $options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
-$pdo = new PDO($dsn, $user, $pass, $options);
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (PDOException $e) {
+    die("Database verbinding mislukt: " . $e->getMessage());
+}
 
 $filmnaam = $_POST['film'] ?? ($_GET['film'] ?? '');
+
+function generateBevestigingsnummer($length = 10) {
+    return substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, $length);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $locatie   = $_POST['locatie'] ?? '';
@@ -27,19 +35,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefoon  = $_POST['telefoon'] ?? '';
     $user_id   = $_SESSION["user_id"] ?? null;
 
+    // Check of er genoeg stoelen zijn
     $checkStmt = $pdo->prepare("SELECT seats FROM movies WHERE naam = ?");
     $checkStmt->execute([$filmnaam]);
     $availableSeats = $checkStmt->fetchColumn();
 
     if ($availableSeats !== false && $availableSeats >= $aantal) {
+        // Voeg reservering toe
         $stmt = $pdo->prepare("INSERT INTO reserveringen (locatie, datum, tijd, aantal, naam, email, telefoon, film, user_id) 
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([$locatie, $datum, $tijd, $aantal, $naam, $email, $telefoon, $filmnaam, $user_id]);
 
-        $updateStmt = $pdo->prepare("UPDATE movies SET seats = seats - ? WHERE naam = ?");
-        $updateStmt->execute([$aantal, $filmnaam]);
+        $reservering_id = $pdo->lastInsertId();
 
-        echo "<script>alert('Reservering opgeslagen!'); window.location.href='films.php';</script>";
+        // Genereer uniek bevestigingsnummer
+        $bevestigingsnummer = generateBevestigingsnummer();
+
+        // Update de reservering met het bevestigingsnummer
+        $updateStmt = $pdo->prepare("UPDATE reserveringen SET bevestigingsnummer = ? WHERE id = ?");
+        $updateStmt->execute([$bevestigingsnummer, $reservering_id]);
+
+        // Update het aantal beschikbare stoelen
+        $updateSeatsStmt = $pdo->prepare("UPDATE movies SET seats = seats - ? WHERE naam = ?");
+        $updateSeatsStmt->execute([$aantal, $filmnaam]);
+
+        echo "<script>alert('Reservering opgeslagen! Bevestigingsnummer: $bevestigingsnummer'); window.location.href='films.php';</script>";
         exit;
     } else {
         echo "<script>alert('Niet genoeg stoelen beschikbaar voor deze film.'); window.history.back();</script>";

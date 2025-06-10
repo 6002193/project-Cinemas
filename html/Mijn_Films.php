@@ -52,10 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_reservering_id
     }
 }
 
-// Reserveringen ophalen
+// Reserveringen ophalen inclusief bevestigingsnummer
 $reserveringen = [];
 try {
-    $stmt = $pdo->prepare("SELECT * FROM reserveringen WHERE user_id = ?");
+    $stmt = $pdo->prepare("SELECT id, film, locatie, datum, tijd, aantal, created_at, bevestigingsnummer FROM reserveringen WHERE user_id = ?");
     $stmt->execute([$_SESSION["user_id"]]);
     $reserveringen = $stmt->fetchAll();
 } catch (PDOException $e) {
@@ -96,6 +96,7 @@ try {
             <thead>
                 <tr>
                     <th>Film</th>
+                    <th>Bevestigingsnummer</th>
                     <th>Locatie</th>
                     <th>Datum</th>
                     <th>Tijd</th>
@@ -108,6 +109,7 @@ try {
                 <?php foreach ($reserveringen as $res): ?>
                     <tr>
                         <td><?= htmlspecialchars($res['film']) ?></td>
+                        <td><?= htmlspecialchars($res['bevestigingsnummer']) ?></td>
                         <td><?= htmlspecialchars($res['locatie']) ?></td>
                         <td><?= htmlspecialchars($res['datum']) ?></td>
                         <td><?= htmlspecialchars($res['tijd']) ?></td>
