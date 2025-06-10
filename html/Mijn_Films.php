@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Databaseverbinding instellen
+// Databaseverbinding
 $host = 'localhost';
 $db   = 'mbocinema';
 $user = 'root';
@@ -26,24 +26,33 @@ if (empty($_SESSION["user_id"])) {
     exit;
 }
 
-// Verwijderen van reservering als formulier verzonden is
+// Reservering aanpassen
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'], $_POST['res_id'])) {
+    $id     = $_POST['res_id'];
+    $loc    = $_POST['locatie'];
+    $datum  = $_POST['datum'];
+    $tijd   = $_POST['tijd'];
+    $aantal = $_POST['aantal'];
+
+    $stmt = $pdo->prepare("UPDATE reserveringen SET locatie = ?, datum = ?, tijd = ?, aantal = ? WHERE id = ? AND user_id = ?");
+    $stmt->execute([$loc, $datum, $tijd, $aantal, $id, $_SESSION["user_id"]]);
+
+    header("Location: Mijn_Films.php");
+    exit;
+}
+
+// Verwijderen van reservering
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_reservering_id'])) {
     $deleteId = $_POST['delete_reservering_id'];
     try {
-        // Eerst ophalen van film en aantal tickets uit de reservering
         $stmt = $pdo->prepare("SELECT film, aantal FROM reserveringen WHERE id = ? AND user_id = ?");
         $stmt->execute([$deleteId, $_SESSION["user_id"]]);
         $reservering = $stmt->fetch();
 
         if ($reservering) {
-            $filmNaam = $reservering['film'];
-            $aantalTickets = (int)$reservering['aantal'];
-
-            // Update tickets beschikbaar in de films tabel
             $updateStmt = $pdo->prepare("UPDATE movies SET seats = seats + ? WHERE naam = ?");
-            $updateStmt->execute([$aantalTickets, $filmNaam]);
+            $updateStmt->execute([(int)$reservering['aantal'], $reservering['film']]);
 
-            // Verwijder de reservering
             $deleteStmt = $pdo->prepare("DELETE FROM reserveringen WHERE id = ? AND user_id = ?");
             $deleteStmt->execute([$deleteId, $_SESSION["user_id"]]);
         }
@@ -52,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_reservering_id
     }
 }
 
-// Reserveringen ophalen inclusief bevestigingsnummer
+// Reserveringen ophalen
 $reserveringen = [];
 try {
     $stmt = $pdo->prepare("SELECT id, film, locatie, datum, tijd, aantal, created_at, bevestigingsnummer FROM reserveringen WHERE user_id = ?");
@@ -87,6 +96,7 @@ try {
         </a>
     </nav>
 </header>
+
 <main class="container mijn-films-container">
     <h2>Welkom, <?= htmlspecialchars($_SESSION["username"]) ?>!</h2>
 
@@ -102,25 +112,37 @@ try {
                     <th>Tijd</th>
                     <th>Aantal</th>
                     <th>Gereserveerd op</th>
-                    <th>Verwijderen</th>
+                    <th>Acties</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($reserveringen as $res): ?>
                     <tr>
-                        <td><?= htmlspecialchars($res['film']) ?></td>
-                        <td><?= htmlspecialchars($res['bevestigingsnummer']) ?></td>
-                        <td><?= htmlspecialchars($res['locatie']) ?></td>
-                        <td><?= htmlspecialchars($res['datum']) ?></td>
-                        <td><?= htmlspecialchars($res['tijd']) ?></td>
-                        <td><?= htmlspecialchars($res['aantal']) ?></td>
-                        <td><?= htmlspecialchars($res['created_at']) ?></td>
-                        <td>
-                            <form method="POST" onsubmit="return confirm('Weet je zeker dat je deze reservering wilt verwijderen?');">
-                                <input type="hidden" name="delete_reservering_id" value="<?= $res['id'] ?>" />
-                                <button type="submit" class="delete-btn">Verwijderen</button>
-                            </form>
-                        </td>
+                        <form method="POST">
+                            <input type="hidden" name="res_id" value="<?= $res['id'] ?>">
+                            <?php if (isset($_POST['edit']) && $_POST['res_id'] == $res['id']): ?>
+                                <td><?= htmlspecialchars($res['film']) ?></td>
+                                <td><?= htmlspecialchars($res['bevestigingsnummer']) ?></td>
+                                <td><input type="text" name="locatie" value="<?= htmlspecialchars($res['locatie']) ?>"></td>
+                                <td><input type="date" name="datum" value="<?= htmlspecialchars($res['datum']) ?>"></td>
+                                <td><input type="time" name="tijd" value="<?= htmlspecialchars($res['tijd']) ?>"></td>
+                                <td><input type="number" name="aantal" value="<?= htmlspecialchars($res['aantal']) ?>" min="1"></td>
+                                <td><?= htmlspecialchars($res['created_at']) ?></td>
+                                <td><button type="submit" name="save">Opslaan</button></td>
+                            <?php else: ?>
+                                <td><?= htmlspecialchars($res['film']) ?></td>
+                                <td><?= htmlspecialchars($res['bevestigingsnummer']) ?></td>
+                                <td><?= htmlspecialchars($res['locatie']) ?></td>
+                                <td><?= htmlspecialchars($res['datum']) ?></td>
+                                <td><?= htmlspecialchars($res['tijd']) ?></td>
+                                <td><?= htmlspecialchars($res['aantal']) ?></td>
+                                <td><?= htmlspecialchars($res['created_at']) ?></td>
+                                <td>
+                                    <button type="submit" name="edit">Bewerk</button>
+                                    <button type="submit" name="delete_reservering_id" value="<?= $res['id'] ?>" onclick="return confirm('Weet je zeker dat je deze reservering wilt verwijderen?');">Verwijder</button>
+                                </td>
+                            <?php endif; ?>
+                        </form>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
