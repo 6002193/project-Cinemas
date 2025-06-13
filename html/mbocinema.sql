@@ -68,4 +68,29 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+-- voor de 2 tables voor reserveringen en films
 
+CREATE TABLE movies (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    naam VARCHAR(255),
+    rating INT(11),
+    room INT(11),
+    seats INT(11),
+    foto_url TEXT
+);
+
+CREATE TABLE reserveringen (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    naam VARCHAR(100),
+    email VARCHAR(100),
+    telefoon VARCHAR(20),
+    locatie VARCHAR(100),
+    datum DATE,
+    tijd TIME,
+    aantal INT(11),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    movie_id INT(11),
+    user_id INT(11),
+    bevestigingsnummer VARCHAR(20),
+    FOREIGN KEY (movie_id) REFERENCES movies(id)
+);
