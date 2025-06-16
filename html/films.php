@@ -96,7 +96,7 @@ $alleFilms = $stmt->fetchAll();
             <p>Seats left over: <?= htmlspecialchars($film['seats']) ?></p>
           </article>
           <?php if (!empty($film['foto_url'])): ?>
-            <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto">
+            <img src="fotos/<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto">
           <?php endif; ?>
         </a>
       <?php endif; ?>
