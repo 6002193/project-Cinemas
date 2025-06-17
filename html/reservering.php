@@ -60,6 +60,7 @@ $reserveringen = $stmt->fetchAll();
  <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap">
 <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/reserve.css">
   <script src="javascript/afhaak.js" defer></script>
 
 

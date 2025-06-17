@@ -54,10 +54,11 @@ $accounts = $stmt->fetchAll();
   <header>
     <nav>
       <a href="index.php" class="logo">Mbo Cinema</a>
-      <ul>
-        <li><a href="films.php">Films</a></li>
-        <li><a href="Mijn_Films.php">Mijn Films</a></li>
-        <li><a href="account_admin.php">Account</a></li>
+            <ul>
+        <li><a href="fimlbeheer.php">filmbeheer</a></li>
+        <li><a href="">zaalbeheer</a></li>
+        <li><a href="reservering.php">reserveringbeheer</a></li>
+        <li><a href="accounts.php">accountbeheer</a></li>
       </ul>
       <a href="Account_admin.php">
         <img src="fotos/profielfoto.webp" alt="profielfoto" class="topbar">

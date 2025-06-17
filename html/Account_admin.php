@@ -68,6 +68,7 @@ if (!$userData) {
     <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/account.css" />
     <link rel="icon" href="fotos/logo.png" type="image/x-icon" />
 </head>
 
