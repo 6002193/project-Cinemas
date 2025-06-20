@@ -114,6 +114,7 @@ $conn->close();
       <?php endforeach; ?>
     </section>
   </main>
+  <script type="module" src="javascript/zoekfunctie.js"></script>
 </body>
 </html>
 

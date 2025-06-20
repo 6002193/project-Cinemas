@@ -4,7 +4,6 @@ session_start();
 
 // Include database connection file 
 include 'db_connection.php';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate input form form
     $username = trim($_POST['uname']);
