@@ -1,46 +1,31 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-$melding = "";
+require_once 'classes/Film.php';
 
-// Connectie
+$melding = "";
 $conn = new mysqli("localhost", "root", "", "mbocinema");
 if ($conn->connect_error) die("Verbinding mislukt: " . $conn->connect_error);
 
+$repo = new FilmRepository($conn);
+
 // Verwijderen
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['verwijder_id'])) {
-    $stmt = $conn->prepare("DELETE FROM movies WHERE naam = ?");
-    $stmt->bind_param("s", $_POST['verwijder_id']);
-    $melding = $stmt->execute() ? "Film verwijderd!" : "Fout bij verwijderen: " . $conn->error;
-    $stmt->close();
+    $melding = $repo->deleteByName($_POST['verwijder_id']) ? "Film verwijderd!" : "Fout bij verwijderen.";
 }
 
 // Toevoegen
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['naam'], $_POST['rating'], $_POST['seats']) && empty($_POST['verwijder_id'])) {
     $naam = $_POST['naam'];
-    $rating = $_POST['rating'];
-    $seats = $_POST['seats'];
+    $rating = (int)$_POST['rating'];
+    $room = $_POST['room'] !== "" ? (int)$_POST['room'] : null;
+    $seats = (int)$_POST['seats'];
     $foto_url = $_POST['foto_url'] ?? null;
-
-    if (empty($_POST['room'])) {
-        $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats, foto_url) VALUES (?, ?, NULL, ?, ?)");
-        $stmt->bind_param("siis", $naam, $rating, $seats, $foto_url);
-    } else {
-        $room = $_POST['room'];
-        $stmt = $conn->prepare("INSERT INTO movies (naam, rating, room, seats, foto_url) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("siiis", $naam, $rating, $room, $seats, $foto_url);
-    }
-
-    $melding = $stmt->execute() ? "Film succesvol toegevoegd!" : "Fout bij toevoegen: " . $conn->error;
-    $stmt->close();
+    $melding = $repo->add($naam, $rating, $room, $seats, $foto_url) ? "Film succesvol toegevoegd!" : "Fout bij toevoegen.";
 }
 
 // Ophalen van alle films
-$films = [];
-$result = $conn->query("SELECT * FROM movies");
-if ($result) {
-    $films = $result->fetch_all(MYSQLI_ASSOC);
-}
+$films = $repo->getAll();
 $conn->close();
 ?>
 
@@ -101,14 +86,14 @@ $conn->close();
     <section class="film-lijst">
       <?php foreach ($films as $film): ?>
         <section class="film-item">
-          <p><?= htmlspecialchars($film['naam']) ?></p>
-          <p><?= htmlspecialchars($film['rating']) ?></p>
+          <p><?= htmlspecialchars($film->getNaam()) ?></p>
+          <p><?= htmlspecialchars($film->getRating()) ?></p>
           <form method="POST" action="fimlbeheer.php" onsubmit="return confirm('Weet je zeker dat je deze film wilt verwijderen?');">
-            <input type="hidden" name="verwijder_id" value="<?= $film['naam'] ?>">
+            <input type="hidden" name="verwijder_id" value="<?= htmlspecialchars($film->getNaam()) ?>">
             <button type="submit">Verwijder</button>
           </form>
-          <?php if (!empty($film['foto_url'])): ?>
-            <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto" style="width: 100px; height: auto;">
+          <?php if (!empty($film->getFotoUrl())): ?>
+            <img src="<?= htmlspecialchars($film->getFotoUrl()) ?>" alt="Filmfoto" style="width: 100px; height: auto;">
           <?php endif; ?>
         </section>
       <?php endforeach; ?>

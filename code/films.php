@@ -44,7 +44,7 @@ $alleFilms = $stmt->fetchAll();
   <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-  <script src="javascript/zoekfunctie.js" defer></script>
+  <script type="module" src="javascript/zoekfunctie.js"></script>
   <link rel="icon" href="fotos/logo.png" type="image/x-icon">
 </head>
 <body>
