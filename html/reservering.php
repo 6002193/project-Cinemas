@@ -57,8 +57,8 @@ $reserveringen = $stmt->fetchAll();
   <meta name="author" content="Jelle Groen">
   <meta charset="UTF-8">
   <title>Mbo Cinema - Reserveringen</title>
- <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap">
-<link href="https://fonts.googleapis.com/css2?family=Karla&display=swap">
+ <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="css/reserve.css">
   <script src="javascript/afhaak.js" defer></script>

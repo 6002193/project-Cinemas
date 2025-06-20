@@ -67,7 +67,6 @@
                 <label for="eml"><b>email</b></label>
                 <input type="email" placeholder="Enter email" name="eml" required>
 
-
                 <label for="tel"><b>telefoonnummer</b></label>
                 <input type="tel" placeholder="Enter Telephone number" name="tel" required>
                 <!-- pattern="[0-9]{3}[0-9]{2}[0-9]{3} -->

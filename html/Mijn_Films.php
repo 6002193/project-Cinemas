@@ -77,6 +77,8 @@ try {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet" />
     <title>Mijn Films</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/mijn_reserveringen.css" />

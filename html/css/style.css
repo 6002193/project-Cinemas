@@ -47,6 +47,7 @@ nav ul {
   gap: 80px;
   padding: 0;
   margin: 0;
+
 }
 
 nav a {
@@ -185,7 +186,7 @@ main {
 
 
 
-/* Instellingenkaart (zoals in de afbeelding) */
+/* Instellingenkaart */
 .settings-container {
   display: flex;
   justify-content: center;
@@ -234,10 +235,7 @@ main {
     gap: 10px;
   }
 
-  nav ul {
-    flex-direction: column;
-    gap: 10px;
-  }
+
 
   main {
     flex-direction: column;
@@ -647,3 +645,8 @@ form {
     .zaal-form button:hover {
       background-color: #005f7f;
     }
+
+
+    /*     flex-direction: column;
+    gap: 10px; */ 
+    

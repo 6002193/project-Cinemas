@@ -46,6 +46,8 @@ $accounts = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <title>Accounts Overzicht</title>
+        <link href="https://fonts.googleapis.com/css2?family=Jomhuria&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Karla&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/mijn_reserveringen.css"> 
 

@@ -61,7 +61,7 @@ $conn->close();
 <body>
   <header>
     <nav>
-            <a href="index.php" class="logo">Mbo Cinema</a>
+      <a href="index.php" class="logo">Mbo Cinema</a>
       <ul>
         <li><a href="">filmbeheer</a></li>
         <li><a href="zaalbeheer.php">zaalbeheer</a></li>
@@ -74,45 +74,46 @@ $conn->close();
     </nav>
   </header>
 
-  <main>
-    <h2>bestaande films</h2>
-    <?php if (!empty($melding)) echo "<p>$melding</p>"; ?>
-    <form method="POST" action="fimlbeheer.php" class="toevoeg-pagina">
-      <label for="naam">Filmtitel:</label><br>
-      <input type="text" id="naam" name="naam" required><br><br>
+  <main class="filmbeheer-main">
+    <section class="toevoeg-container">
+      <h2>Bestaande films</h2>
+      <?php if (!empty($melding)) echo "<p>$melding</p>"; ?>
+      <form method="POST" action="fimlbeheer.php" class="toevoeg-pagina">
+        <label for="naam">Filmtitel:</label><br>
+        <input type="text" id="naam" name="naam" required><br><br>
 
-      <label for="rating">PEGI Rating:</label><br>
-      <input type="number" id="rating" name="rating" min="0" max="18" required><br><br>
+        <label for="rating">PEGI Rating:</label><br>
+        <input type="number" id="rating" name="rating" min="0" max="18" required><br><br>
 
-      <label for="room">kamernummer:</label><br>
-      <input type="number" id="room" name="room"><br><br>
+        <label for="room">Kamernummer:</label><br>
+        <input type="number" id="room" name="room"><br><br>
 
-      <label for="seats">stoelen:</label><br>
-      <input type="number" id="seats" name="seats" required><br><br>
+        <label for="seats">Stoelen:</label><br>
+        <input type="number" id="seats" name="seats" required><br><br>
 
-      <label for="foto_url">Afbeeldingslink:</label><br>
-      <input type="url" id="foto_url" name="foto_url"><br><br>
+        <label for="foto_url">Afbeeldingslink:</label><br>
+        <input type="url" id="foto_url" name="foto_url"><br><br>
 
-
-      <input type="submit" value="Voeg toe">
-    </form>
-
-<h2>voeg een film toe</h2>
-<section class="film-lijst">
-  <?php foreach ($films as $film): ?>
-    <section class="film-item">
-      <p><?= htmlspecialchars($film['naam']) ?></p>
-      <p><?= htmlspecialchars($film['rating']) ?></p>
-      <form method="POST" action="fimlbeheer.php" onsubmit="return confirm('Weet je zeker dat je deze film wilt verwijderen?');">
-        <input type="hidden" name="verwijder_id" value="<?= $film['naam'] ?>">
-        <button type="submit">Verwijder</button>
+        <input type="submit" value="Voeg toe">
       </form>
-        <?php if (!empty($film['foto_url'])): ?>
-  <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto" style="width: 100px; height: auto;">
-<?php endif; ?>
-  </section>
-  <?php endforeach; ?>
-  </section>
+    </section>
 
+    <section class="film-lijst">
+      <?php foreach ($films as $film): ?>
+        <section class="film-item">
+          <p><?= htmlspecialchars($film['naam']) ?></p>
+          <p><?= htmlspecialchars($film['rating']) ?></p>
+          <form method="POST" action="fimlbeheer.php" onsubmit="return confirm('Weet je zeker dat je deze film wilt verwijderen?');">
+            <input type="hidden" name="verwijder_id" value="<?= $film['naam'] ?>">
+            <button type="submit">Verwijder</button>
+          </form>
+          <?php if (!empty($film['foto_url'])): ?>
+            <img src="<?= htmlspecialchars($film['foto_url']) ?>" alt="Filmfoto" style="width: 100px; height: auto;">
+          <?php endif; ?>
+        </section>
+      <?php endforeach; ?>
+    </section>
+  </main>
 </body>
 </html>
+
