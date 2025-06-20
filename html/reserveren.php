@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="film" value="<?= htmlspecialchars($filmnaam) ?>" readonly>
         <input type="text" name="naam" value="<?= htmlspecialchars($_SESSION["username"] ?? '') ?>" placeholder="Naam" required>
         <input type="email" name="email" value="<?= htmlspecialchars($_SESSION["email"] ?? '') ?>"  placeholder="Email" required>
-        <input type="tel" name="telefoon" value="<?= htmlspecialchars($_SESSION["telefoonnumer"] ?? '') ?>"  placeholder="Telefoonnummer" required>
+        <input type="tel" name="telefoon" value="<?= htmlspecialchars($_SESSION["telefoonnummer"] ?? '') ?>"  placeholder="Telefoonnummer" required>
         <input type="text" name="locatie" placeholder="Locatie" required>
         <input type="date" name="datum" required>
         <input type="time" name="tijd" required>

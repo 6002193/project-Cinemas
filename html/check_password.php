@@ -18,14 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
     // Prepare a SQL statement to prevent SQL injection 
     // Let ook admin ophalen in je query
-    $stmt = $conn->prepare("SELECT Id, UserPassword, is_admin FROM users WHERE UserName = ?");
+    $stmt = $conn->prepare("SELECT Id, UserPassword, is_admin, email, telefoonnumer FROM users WHERE UserName = ?");
     $stmt->bind_param("s", $username); 
     $stmt->execute(); 
     $stmt->store_result(); 
  
     // Check if username exists 
     if ($stmt->num_rows == 1) { 
-        $stmt->bind_result($id, $hashed_password, $admin); 
+        $stmt->bind_result($id, $hashed_password, $admin, $email, $telefoonnummer); 
         $stmt->fetch(); 
  
         // Verify the password 
@@ -37,6 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"] = $username;
             $_SESSION["user_id"] = $id;
             $_SESSION['admin'] = $admin;  // <-- hier gebruiken we admin van DB
+            $_SESSION["email"] = $email;
+            $_SESSION['telefoonnummer'] = $telefoonnummer; 
  
             // Redirect to the protected page 
             header("location: index.php"); 

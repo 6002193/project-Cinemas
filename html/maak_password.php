@@ -49,8 +49,8 @@ if ($stmt->num_rows > 0) {
 
    // Insert new user
         $insert = $conn->prepare("INSERT INTO users (UserName, UserPassword, email, telefoonnumer) VALUES (?, ?, ?, ?)");
-        $insert->bind_param("ssss", $username, $Hashed_password, $email, $telefoonnumer);
-
+        $insert->bind_param("ssss", $username, $Hashed_password, $email, $telefoonnummer);
+       
         if ($insert->execute()) {
             echo "Nieuwe gebruiker succesvol aangemaakt.";
    
