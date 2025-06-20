@@ -87,11 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </section>
 
       <h1>Mbo Cinema</h1>
-      <form method="post">
+           <form method="post">
         <input type="text" name="film" value="<?= htmlspecialchars($filmnaam) ?>" readonly>
-        <input type="text" name="naam" placeholder="Voor en Achternaam" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="tel" name="telefoon" placeholder="Telefoonnummer" required>
+        <input type="text" name="naam" value="<?= htmlspecialchars($_SESSION["username"] ?? '') ?>" placeholder="Naam" required>
+        <input type="email" name="email" value="<?= htmlspecialchars($_SESSION["email"] ?? '') ?>"  placeholder="Email" required>
+        <input type="tel" name="telefoon" value="<?= htmlspecialchars($_SESSION["telefoonnumer"] ?? '') ?>"  placeholder="Telefoonnummer" required>
         <input type="text" name="locatie" placeholder="Locatie" required>
         <input type="date" name="datum" required>
         <input type="time" name="tijd" required>
