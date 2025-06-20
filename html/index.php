@@ -1,9 +1,15 @@
 <?php
 session_start();
+
+if (empty($_SESSION["username"])):
+  header("Location: inloggen.php");
+  exit;
+endif
 ?>
 
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Een korte omschrijving van je website die in zoekmachines verschijnt.">
@@ -20,13 +26,10 @@ session_start();
 <body class="background">
   <header>
     <nav>
-<a 
-  href="<?= (!empty($_SESSION['admin']) && $_SESSION['admin'] == 1) ? 'fimlbeheer.php' : '#' ?>" 
-  class="logo"
-  <?= (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) ? 'style="pointer-events: none; opacity: 0.5;"' : '' ?>
->
-  Mbo Cinema
-</a>
+      <a href="<?= (!empty($_SESSION['admin']) && $_SESSION['admin'] == 1) ? 'fimlbeheer.php' : '#' ?>" class="logo"
+        <?= (empty($_SESSION['admin']) || $_SESSION['admin'] != 1) ? 'style="pointer-events: none; opacity: 0.5;"' : '' ?>>
+        Mbo Cinema
+      </a>
 
       <ul>
         <li><a href="films.php">Films</a></li>
@@ -43,15 +46,15 @@ session_start();
     <section class="intro">
       <p>
         <?php if (!empty($_SESSION["username"])): ?>
-          <h2>Hallo <?= htmlspecialchars($_SESSION["username"]) ?>.<br></h2>
-        <?php endif; ?>
+        <h2>Hallo <?= htmlspecialchars($_SESSION["username"]) ?>.<br></h2>
+      <?php endif; ?>
 
-        Welkom bij Mbo Cinema. Jouw filmervaring begint hier.<br>
-        Stap binnen in de wereld van film! Bij Mbo Cinema beleef je de nieuwste,
-        meeslepende arthousefilms en tijdloze klassiekers in een comfortabele
-        en moderne setting. Geniet van de ultieme bioscoopervaring met haarscherp
-        beeld, krachtig geluid en de beste service. Ontdek ons actuele programma,
-        koop eenvoudig je tickets online en laat je verrassen door film zoals het bedoeld is.
+      Welkom bij Mbo Cinema. Jouw filmervaring begint hier.<br>
+      Stap binnen in de wereld van film! Bij Mbo Cinema beleef je de nieuwste,
+      meeslepende arthousefilms en tijdloze klassiekers in een comfortabele
+      en moderne setting. Geniet van de ultieme bioscoopervaring met haarscherp
+      beeld, krachtig geluid en de beste service. Ontdek ons actuele programma,
+      koop eenvoudig je tickets online en laat je verrassen door film zoals het bedoeld is.
       </p>
     </section>
 
@@ -61,4 +64,5 @@ session_start();
     </section>
   </main>
 </body>
+
 </html>
