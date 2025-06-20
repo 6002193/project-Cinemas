@@ -28,6 +28,11 @@ session_start();
   Mbo Cinema
 </a>
 
+   <?php if (empty($_SESSION["username"])):   
+        header("Location: inloggen.php");            
+        exit; 
+    
+     endif; ?>
       <ul>
         <li><a href="films.php">Films</a></li>
         <li><a href="Mijn_Films.php">Mijn Films</a></li>

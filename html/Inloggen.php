@@ -67,9 +67,7 @@
              
 
                 <button class="button-link" type="submit">Login</button>
-                <label>
-                    <input type="checkbox" name="remember"> Remember me
-                </label>
+                
             </div>
 
              <div class="container">            
