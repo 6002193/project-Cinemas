@@ -43,12 +43,12 @@
     <main>
         <row1 class="row1">
             <img class="inlogfilm" src="fotos/shang-chi.png" alt="Film afbeelding">
-            <img class="inlogfilm" src="fotos/shang-chi.png" alt="Film afbeelding">
+            <img class="inlogfilm" src="fotos/dinopark.png" alt="Film afbeelding">
 
         </row1>
         <row2 class="row2">
-            <img class="inlogfilm" src="fotos/shang-chi.png" alt="Film afbeelding">
-            <img class="inlogfilm" src="fotos/shang-chi.png" alt="Film afbeelding">
+            <img class="inlogfilm" src="fotos/inception.png" alt="Film afbeelding">
+            <img class="inlogfilm" src="fotos/titanic.png" alt="Film afbeelding">
 
         </row2>
 
